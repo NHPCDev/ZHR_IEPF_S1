@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZPS_BOQ_ESTIMATION_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ETY_BOQ_STATUS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Key" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_DPR_HELP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="DPR" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_STAGE_HELP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Stage" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_RD_HELP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Responsible Devision" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_ATTACHMENT" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="Filename"/>
+                    <PropertyRef Name="Doc_Id"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Filename" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mimetype" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FileCategory" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DivisionKey" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Doc_Id" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_EST_INIT_FORM" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Pspid"/>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="DprHead"/>
+                    <PropertyRef Name="Stage"/>
+                    <PropertyRef Name="Respdiv"/>
+                </Key>
+                <Property Name="Pspid" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Project def." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PspidDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="PD Short description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EstDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Estimation Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DprHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="DPR Head" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DprDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="DPR Head Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stage" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Stage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StageDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Stage Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Respdiv" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Responsible Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RespdivDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Resp Div Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InsDate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Initiation Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateInput" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ex Date for Input" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Filename" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="File Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createdon" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Create Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createdby" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="BOQ Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pspnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="WBS Element" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReWFflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Re Trigger WF" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_EST_INIT_FORM_DET" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="Pspid" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Project def." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PspidDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="PD Short description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EstDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Estimation Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DprHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="DPR Head" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DprDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="DPR Head Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stage" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Stage" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StageDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Stage Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Respdiv" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Responsible Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RespdivDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Resp Div Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InsDate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Initiation Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DateInput" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ex Date for Input" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="BOQ Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pspnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="WBS Element" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SubmitFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Submit Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsApprovedFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="IsApprovedFlagSubmit Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HODFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="SubHODFlagmit Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SaveFlag" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Save Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQUsrGrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQRecomm" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQApprove" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RFEFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Ready For Estimation Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReWFflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Re Trigger WF" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="InitFormDetToAttachmentNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToAttachment" FromRole="FromRole_InitFormDetToAttachment" ToRole="ToRole_InitFormDetToAttachment"/>
+                <NavigationProperty Name="InitFormDetToWrkGpNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToWrkGp" FromRole="FromRole_InitFormDetToWrkGp" ToRole="ToRole_InitFormDetToWrkGp"/>
+                <NavigationProperty Name="InitFormDetToWrkGpDetNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToWrkGpDet" FromRole="FromRole_InitFormDetToWrkGpDet" ToRole="ToRole_InitFormDetToWrkGpDet"/>
+                <NavigationProperty Name="InitFormDetToHoldNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToHold" FromRole="FromRole_InitFormDetToHold" ToRole="ToRole_InitFormDetToHold"/>
+                <NavigationProperty Name="InitFormDetToAppListNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToAppList" FromRole="FromRole_InitFormDetToAppList" ToRole="ToRole_InitFormDetToAppList"/>
+                <NavigationProperty Name="InitFormDetToLogNav" Relationship="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToLog" FromRole="FromRole_InitFormDetToLog" ToRole="ToRole_InitFormDetToLog"/>
+            </EntityType>
+            <EntityType Name="ETY_WRK_GP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="GpId"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkGp" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkGpDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group Descripti" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AppFlag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Approval Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQCByName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="BOQ Create By Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQCreateOn" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Create Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQCreateTime" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Create Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQMByName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="BOQ Modify By Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQModifyOn" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Modify Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BOQModifyTime" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Modify Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_UOM" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Measurement" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Desc" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Unit of Measurement Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_WRK_GP_DET" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="GpId"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpDetId" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Group Details ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RefTechspec" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Ref to Tech. Spec" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BoqDesc" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Qty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Measurement" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LumsumRate" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:label="Lum Sum Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DelInd" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Delete Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ItemChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ItemRev" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Revised Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Description Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescRev" Type="Edm.String" Nullable="false" MaxLength="250" sap:unicode="false" sap:label="Revised Group ID Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QtyChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Quantity Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QtyRev" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Revised Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NewEntry" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="New Entry Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HeadIdenf" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Check Box" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zcount" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_REPORT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="GpId"/>
+                </Key>
+                <Property Name="Pspid" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Project def." sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PspidDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="PD Short description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="EstDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Estimation Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="DprHead" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="DPR Head" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DprDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="DPR Head Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stage" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Stage" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="StageDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Stage Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Respdiv" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Responsible Division" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="RespdivDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Resp Div Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InsDate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Initiation Date" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DateInput" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Ex Date for Input" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Filename" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="File Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Createdon" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Create Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Createdby" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="GpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="WorkGp" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkGpDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group Descripti" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Approval1" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approval1 ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App1Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Approval1 Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App1Date" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Approval1 Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App1Rem" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Approval1 Remark" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Approval2" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approval2 ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App2Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Approval2 Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App2Date" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Approval2 Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App2Rem" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Approval2 Remark" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Approval3" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Approval3 ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App3Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Approval3 Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App3Date" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Approval3 Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="App3Rem" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Approval3 Remark" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpDetId" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Group Details ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="RefTechspec" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Ref to Tech. Spec" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="BoqDesc" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Qty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Measurement" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="LumsumRate" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:label="Lum Sum Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="DelInd" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Delete Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ItemRev" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Revised Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="DescRev" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Revised Group ID Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="QtyRev" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Revised Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="NewEntry" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="New Entry Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_STATUS_HELP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Key"/>
+                </Key>
+                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Key" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_RFE" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="BOQ Status" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_HOLD" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="PspidEdit" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Project def." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Respdiv" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Responsible Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RespdivDesc" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Resp Div Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="BOQ Hold Remakrs" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DivRemarks" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="Division Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="BOQ Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SubStatus" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Sub Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_CostEstRev" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_ROLES" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CED"/>
+                    <PropertyRef Name="InitDiv"/>
+                    <PropertyRef Name="RespDiv"/>
+                </Key>
+                <Property Name="CED" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="CED" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InitDiv" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Division Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RespDiv" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Responsible Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_RevisionReport" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                    <PropertyRef Name="RevVerCE"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="WorkGp" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkGpDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Work Group Descripti" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Current Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="RevVerCE" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Current Revision Version of CE" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="PreRevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Previous Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="PreRevVerCE" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Previous Revision Version to CE" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ItemChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Item Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Item" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID Detail Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RefTechspec" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Ref to Tech. Spec" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreRefTechspec" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Ref to Tech. Spec" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Description Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BoqDesc" Type="Edm.String" Nullable="false" MaxLength="500" sap:unicode="false" sap:label="Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreBoqDesc" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Item Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QtyChg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Quantity Change Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Qty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreQty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Measurement" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit of Measurement" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LumsumRate" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:label="Lum Sum Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreLumsumRate" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:label="Lum Sum Rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CeRate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Estimation rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreCeRate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cost Estimation rate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CeEstValue" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Cost Estimation Estimated Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PreCeEstValue" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Cost Estimation Estimated Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zcount" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Count" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NewEntry" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="New Entry" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_WBSElement" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProjectDefinition"/>
+                    <PropertyRef Name="WBS"/>
+                    <PropertyRef Name="WBSDesc"/>
+                </Key>
+                <Property Name="ProjectDefinition" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Project definition" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="WBS" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS Element" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="WBSDesc" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="WBS Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_ApprovalList" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AppLevel" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Approval Level" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Approval" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Branching name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AppName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Complete name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AppMailid" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hod" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_Log" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createdby" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedName" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createdon" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Create Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Createdtime" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="BOQ Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Remarks" Type="Edm.String" Nullable="false" MaxLength="300" sap:unicode="false" sap:label="BOQ Remarks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_WRK_GP_Delete" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="GpId"/>
+                </Key>
+                <Property Name="GpId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_UserGrp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BOQUsrGrp"/>
+                </Key>
+                <Property Name="BOQUsrGrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_Accept" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserName"/>
+                </Key>
+                <Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name in User Master Record" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_Recommend" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserName"/>
+                </Key>
+                <Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name in User Master Record" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_EstReqNoRevHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RevVer" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Revision Version" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_ReWF" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EstReqNo"/>
+                </Key>
+                <Property Name="EstReqNo" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:label="Est Req Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReBOQRecomm" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReBOQApprove" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZPM_CDS_PROJDEF_SERHLPType" sap:label="Project Definition Search Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="pspid"/>
+                </Key>
+                <Property Name="pspid" Type="Edm.String" Nullable="false" MaxLength="24" sap:display-format="UpperCase" sap:label="Project Definition" sap:quickinfo="Project Number (External) Edited"/>
+                <Property Name="post1" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="PS: Short description (1st text line)"/>
+            </EntityType>
+            <EntityType Name="ZPS_CDS_EMP_DETType" sap:label="BOQ Employee Detail" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EmployeeNumber"/>
+                </Key>
+                <Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Personnel Number"/>
+                <Property Name="EmployeeName" Type="Edm.String" MaxLength="40" sap:label="Employee/app.name" sap:quickinfo="Formatted Name of Employee or Applicant"/>
+                <Property Name="EmployeeMailID" Type="Edm.String" MaxLength="241" sap:display-format="UpperCase" sap:label="Long ID/Number" sap:quickinfo="Communication: Long Identification/Number"/>
+            </EntityType>
+            <EntityType Name="ZPS_CDS_ESTREQNO_HELPType" sap:label="Estimate Request Number Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="est_req_no"/>
+                </Key>
+                <Property Name="est_req_no" Type="Edm.String" Nullable="false" MaxLength="7" sap:display-format="UpperCase" sap:label="Est Req Number" sap:quickinfo="Estimation Requirement Number"/>
+                <Property Name="est_desc" Type="Edm.String" MaxLength="100" sap:display-format="UpperCase" sap:label="Estimation Desc" sap:quickinfo="Estimation Description"/>
+            </EntityType>
+            <EntityType Name="ZPS_CDS_UNIT_HELPType" sap:label="BOQ Unit Help" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="msehi"/>
+                </Key>
+                <Property Name="msehi" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="3-Byte field" sap:heading=""/>
+                <Property Name="msehl" Type="Edm.String" MaxLength="30" sap:label="Meas. Unit Text" sap:quickinfo="Unit of Measurement Text (Maximum 30 Characters)"/>
+            </EntityType>
+            <Association Name="InitFormDetToWrkGp" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToWrkGp"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_WRK_GP" Multiplicity="*" Role="ToRole_InitFormDetToWrkGp"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToWrkGp">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToWrkGp">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InitFormDetToWrkGpDet" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToWrkGpDet"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_WRK_GP_DET" Multiplicity="*" Role="ToRole_InitFormDetToWrkGpDet"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToWrkGpDet">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToWrkGpDet">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InitFormDetToHold" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToHold"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_HOLD" Multiplicity="*" Role="ToRole_InitFormDetToHold"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToHold">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToHold">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InitFormDetToAppList" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToAppList"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_ApprovalList" Multiplicity="*" Role="ToRole_InitFormDetToAppList"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToAppList">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToAppList">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InitFormDetToLog" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToLog"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_Log" Multiplicity="*" Role="ToRole_InitFormDetToLog"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToLog">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToLog">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InitFormDetToAttachment" sap:content-version="1">
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" Multiplicity="1" Role="FromRole_InitFormDetToAttachment"/>
+                <End Type="ZPS_BOQ_ESTIMATION_SRV.ETY_ATTACHMENT" Multiplicity="*" Role="ToRole_InitFormDetToAttachment"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InitFormDetToAttachment">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InitFormDetToAttachment">
+                        <PropertyRef Name="EstReqNo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZPS_BOQ_ESTIMATION_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZPM_CDS_PROJDEF_SERHLP" EntityType="ZPS_BOQ_ESTIMATION_SRV.ZPM_CDS_PROJDEF_SERHLPType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPS_CDS_EMP_DET" EntityType="ZPS_BOQ_ESTIMATION_SRV.ZPS_CDS_EMP_DETType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPS_CDS_ESTREQNO_HELP" EntityType="ZPS_BOQ_ESTIMATION_SRV.ZPS_CDS_ESTREQNO_HELPType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPS_CDS_UNIT_HELP" EntityType="ZPS_BOQ_ESTIMATION_SRV.ZPS_CDS_UNIT_HELPType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_BOQ_STATUSSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_BOQ_STATUS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_DPR_HELPSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_DPR_HELP" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_STAGE_HELPSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_STAGE_HELP" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_RD_HELPSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_RD_HELP" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_ATTACHMENTSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_ATTACHMENT" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_EST_INIT_FORMSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_EST_INIT_FORM_DETSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_EST_INIT_FORM_DET" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_WRK_GPSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_WRK_GP" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_UOMSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_UOM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_WRK_GP_DETSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_WRK_GP_DET" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_REPORTSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_REPORT" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_STATUS_HELPSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_STATUS_HELP" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_RFESet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_RFE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_HOLDSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_HOLD" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_CostEstRevSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_CostEstRev" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_ROLESSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_ROLES" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_RevisionReportSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_RevisionReport" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_WBSElementSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_WBSElement" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_ApprovalListSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_ApprovalList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_LogSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_Log" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_WRK_GP_DeleteSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_WRK_GP_Delete" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_UserGrpSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_UserGrp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_AcceptSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_Accept" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_RecommendSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_Recommend" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_EstReqNoRevHelpSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_EstReqNoRevHelp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETY_ReWFSet" EntityType="ZPS_BOQ_ESTIMATION_SRV.ETY_ReWF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="InitFormDetToLogSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToLog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToLog"/>
+                    <End EntitySet="ETY_LogSet" Role="ToRole_InitFormDetToLog"/>
+                </AssociationSet>
+                <AssociationSet Name="InitFormDetToHoldSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToHold" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToHold"/>
+                    <End EntitySet="ETY_HOLDSet" Role="ToRole_InitFormDetToHold"/>
+                </AssociationSet>
+                <AssociationSet Name="InitFormDetToAppListSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToAppList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToAppList"/>
+                    <End EntitySet="ETY_ApprovalListSet" Role="ToRole_InitFormDetToAppList"/>
+                </AssociationSet>
+                <AssociationSet Name="InitFormDetToWrkGpSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToWrkGp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToWrkGp"/>
+                    <End EntitySet="ETY_WRK_GPSet" Role="ToRole_InitFormDetToWrkGp"/>
+                </AssociationSet>
+                <AssociationSet Name="InitFormDetToAttachmentSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToAttachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToAttachment"/>
+                    <End EntitySet="ETY_ATTACHMENTSet" Role="ToRole_InitFormDetToAttachment"/>
+                </AssociationSet>
+                <AssociationSet Name="InitFormDetToWrkGpDetSet" Association="ZPS_BOQ_ESTIMATION_SRV.InitFormDetToWrkGpDet" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETY_EST_INIT_FORM_DETSet" Role="FromRole_InitFormDetToWrkGpDet"/>
+                    <End EntitySet="ETY_WRK_GP_DETSet" Role="ToRole_InitFormDetToWrkGpDet"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="ZPS_BOQ_ESTIMATION_SRV.ZPS_BOQ_ESTIMATION_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <atom:link rel="self" href="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/sap/ZPS_BOQ_ESTIMATION_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://VHNPDDNHCI.SAP.NHPC.IN:44300/sap/opu/odata/sap/ZPS_BOQ_ESTIMATION_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

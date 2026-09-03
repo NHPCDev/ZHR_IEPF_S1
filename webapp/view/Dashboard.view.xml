@@ -1,0 +1,178 @@
+<mvc:View
+    controllerName="com.nhpc.zhriepfs1.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    class="sapUiSizeCompact"
+>
+    <f:DynamicPage
+        id="_IDGenDynamicPage1"
+        headerExpanded="true"
+        showFooter="true"
+    >
+        <f:header>
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1">
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearchBtn"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                id="_IDGenFilterGroupItem1"
+                                name="TransactionID"
+                                label="{i18n>transactionId}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="transID"
+                                        value="{viewModel>/filterData/TRANS_ID}"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                id="_IDGenFilterGroupItem2"
+                                name="CreatedOn"
+                                label="{i18n>createdOn}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DatePicker
+                                        id="idCreatedOn"
+                                        value="{viewModel>/filterData/UPLOADED_DATE}"
+                                        displayFormat="dd.MM.yyyy"
+                                        valueFormat="yyyyMMdd"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                id="_IDGenFilterGroupItem3"
+                                name="Status"
+                                label="{i18n>status}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox
+                                        id="idStatus"
+                                        selectedKey="{viewModel>/filterData/STATUS}"
+                                        change="onComboBoxChange"
+                                        items="{path: '/F4_StatusSet'}"
+                                    >
+                                        <core:ListItem
+                                            key="{STATUS}"
+                                            text="{STATUS_TEXT}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
+                <Table
+                    id="idDashboardTable"
+                    items="{/HeaderSet}"
+                    growing="true"
+                    growingThreshold="20"
+                    width="100%"
+                    mode="None"
+                    autoPopinMode="true"
+                    alternateRowColors="true"
+                    sticky="ColumnHeaders,HeaderToolbar,InfoToolbar"
+                    updateFinished="onDashboardTableUpdateFinish"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title
+                                id="dashBoardTitle"
+                                text="{= ${i18n>dashboardTableTitle} + ' (' + (${/HeaderSet} ? ${/HeaderSet}.length : 0) + ')' }"
+                            />
+                            <ToolbarSpacer />
+                            <Button
+                                text="{i18n>createBtnText}"
+                                press="onCreate"
+                                type="Emphasized"
+                                icon="sap-icon://add"
+                            />
+                            <Button
+                                text="{i18n>downloadReportBtnText}"
+                                press="onDownload"
+                                type="Reject"
+                                icon="sap-icon://excel-attachment"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>transactionId}" />
+                        </Column>
+
+                        <Column>
+                            <Text text="{i18n>type}" />
+                        </Column>
+
+                        <Column>
+                            <Text text="{i18n>createdBy}" />
+                        </Column>
+
+                        <Column>
+                            <Text text="{i18n>createdOn}" />
+                        </Column>
+
+                        <Column>
+                            <Text text="{i18n>status}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem
+                            type="Navigation"
+                            press="onListItemPress"
+                        >
+                            <cells>
+                                <ObjectIdentifier title="{TRANS_ID}" />
+                                <Text text="{UPLOAD_TYPE_TEXT}" />
+                                <ObjectIdentifier
+                                    title="{UPLOADED_BY_NAME}"
+                                    text="{UPLOADED_BY}"
+                                />
+                                <Text
+                                    text="{
+                                        path: 'UPLOADED_DATE',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions: {
+                                            source: {
+                                                pattern: 'dd.MM.yyyy'
+                                            },
+                                            pattern: 'dd.MM.yyyy'
+                                        }
+                                }"
+                                />
+                                <ObjectStatus
+                                    text="{STATUS_TEXT}"
+                                    class="sapMObjectStatusMedium statusBoldText"
+                                    state="{path:'STATUS_TEXT',formatter:'.formatter.formatStatusState'}"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

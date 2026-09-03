@@ -1,0 +1,23 @@
+<c:FragmentDefinition xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    class="sapUiSizeCompact">
+    <HBox class="sapUiSmallMarginBegin" justifyContent="SpaceBetween" renderType="Bare" wrap="Wrap"   >
+        <VBox renderType="Bare" wrap="Wrap" >
+            <ObjectStatus title="{i18n>employeeIdLabel}" text="{path: 'viewModel>/requestDetails/EmployeeId', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>employeeNameLabel}" text="{path: 'viewModel>/requestDetails/EmployeeName', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>companyCodeLabel}" text="{path: 'viewModel>/requestDetails/CompanyCode', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>gradeLabel}" text="{path: 'viewModel>/requestDetails/EmployeeGrade', formatter: '.formatter.formatBlankValue'}" />           
+        </VBox>
+        <VBox class="sapUiLargeMarginBegin" renderType="Bare" wrap="Wrap" >
+            <ObjectStatus title="{i18n>employeeSubGroupLabel}" text="{path: 'viewModel>/requestDetails/EmployeeSubgrp', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>employeeSubGroupDescLabel}" text="{path: 'viewModel>/requestDetails/EmployeeSubgrpText', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>personalSubAreaLabel}" text="{path: 'viewModel>/requestDetails/PersonnelSubArea', formatter: '.formatter.formatBlankValue'}" />
+            <ObjectStatus title="{i18n>personalSubAreaDescLabel}" text="{path: 'viewModel>/requestDetails/PersonnelSubAreaText', formatter: '.formatter.formatDate'}" />
+        </VBox>
+        <VBox class="sapUiLargeMarginBegin" renderType="Bare" wrap="Wrap" >
+            <ObjectStatus title="{i18n>departmentLabel}" 
+                text="{path: 'viewModel>/requestDetails/Department', formatter: '.formatter.formatBlankValue'} " />
+            <ObjectStatus title="{i18n>positionLabel}" text="{path: 'viewModel>/requestDetails/PositionText', formatter: '.formatter.formatBlankValue'}" />
+        </VBox>
+    </HBox>
+</c:FragmentDefinition>
