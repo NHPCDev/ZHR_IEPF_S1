@@ -19,6 +19,11 @@ server:
           - path: /sap
             url: http://vhnpddnhci.sap.nhpc.in:44300
             destination: s4hanadest
+            #  Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+          - path: /malware_api
+            destination: malwarescandest
+            pathPrefix: /
+            # End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

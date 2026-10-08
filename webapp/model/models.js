@@ -30,9 +30,17 @@ function (JSONModel, Device) {
                 },
                 valueState: {
                     selectedType: "None",
+                    // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+                    finYear:"None",
+                    monthYear:"None"
+                    // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
                 },
                 valueStateText: {
                     selectedType: null,
+                    // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+                    finYear: null,
+                    monthYear: null
+                    // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
                 }
             });
             oViewModel.setDefaultBindingMode("TwoWay");

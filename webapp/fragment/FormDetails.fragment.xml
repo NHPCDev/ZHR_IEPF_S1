@@ -1,16 +1,57 @@
 <core:FragmentDefinition
-    xmlns="sap.m" 
-    xmlns:core="sap.ui.core" 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
-    class="sapUiSizeCompact">
-
-    <f:SimpleForm editable="true" layout="ColumnLayout">
-        <Label text="Type"/>
-        <Select selectedKey="{viewModel>/selectedType}" items="{/F4_UploadTypeSet}" editable="false">
-            <core:Item key="{UPLOAD_TYPE}" text="{UPLOAD_TYPE_TEXT}"/>
-        
+    class="sapUiSizeCompact"
+>
+    <f:SimpleForm
+        editable="true"
+        layout="ColumnLayout"
+    >
+        <Label text="Type" />
+        <Select
+            selectedKey="{viewModel>/selectedType}"
+            items="{/F4_UploadTypeSet}"
+            editable="false"
+        >
+            <core:Item
+                key="{UPLOAD_TYPE}"
+                text="{UPLOAD_TYPE_TEXT}"
+            />
         </Select>
-
+         <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
+        <Label
+            text="{i18n>finYear}"
+            required="true"
+        />
+        <ComboBox
+            width="100%"
+            selectedItem="{viewModel>/finYear}"
+            selectedKey="{viewModel>/finYear}"
+            change="onComboboxChange"
+            items="{path: '/ZHCM_IEPF_CDS_FINYEAR_F4H'}"
+            valueState="{viewModel>/valueState/finYear}"
+            valueStateText="{viewModel>/valueStateText/finYear}"
+            visible="{= ${viewModel>/selectedType} === 'D'}"
+            editable="false"
+        >
+            <core:ListItem
+                key="{finyear}"
+                text="{finyear}"
+            />
+        </ComboBox>
+        <Label
+            text="{i18n>monYear}"
+            required="true"
+        />
+        <DatePicker
+            id="idMonthYear1"
+            displayFormat="MM.yyyy"
+            valueFormat="yyyyMM"
+            value="{viewModel>/monthYear}"
+            visible="{= ${viewModel>/selectedType} === 'S'}"
+            editable="false"
+        />
+        <!-- End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
     </f:SimpleForm>
-
 </core:FragmentDefinition>

@@ -15,10 +15,12 @@
     >
         <content>
             <VBox>
+            <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                 <f:SimpleForm
                     editable="true"
-                    layout="ResponsiveGridLayout"
+                    layout="ColumnLayout"
                 >
+            <!-- End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                     <f:content>
                         <Label
                             text="{i18n>chooseType}"
@@ -38,6 +40,41 @@
                                 text="{UPLOAD_TYPE_TEXT}"
                             />
                         </ComboBox>
+                        <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
+                        <Label
+                            text="{i18n>finYear}"
+                            required="true"
+                        />
+                        <ComboBox
+                            width="100%"
+                            selectedItem="{viewModel>/finYear}"
+                            selectedKey="{viewModel>/finYear}"
+                            change="onComboboxChange"
+                            items="{path: '/ZHCM_IEPF_CDS_FINYEAR_F4H'}"
+                            valueState="{viewModel>/valueState/finYear}"
+                            valueStateText="{viewModel>/valueStateText/finYear}"
+                            visible="{= ${viewModel>/selectedType} === 'D'}"
+                        >
+                            <core:ListItem
+                                key="{finyear}"
+                                text="{finyear}"
+                            />
+                        </ComboBox>
+                        <Label
+                            text="{i18n>monYear}"
+                            required="true"
+                        />
+                        <DatePicker
+                            id="idMonthYear"
+                            displayFormat="MM.yyyy"
+                            valueFormat="MM.yyyy"
+                            value="{viewModel>/monthYear}"
+                            visible="{= ${viewModel>/selectedType} === 'S'}"
+                            change="onMonthYearChange"
+                            valueState="{viewModel>/valueState/monthYear}"
+                            valueStateText="{viewModel>/valueStateText/monthYear}"
+                        />
+                        <!-- End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                     </f:content>
                 </f:SimpleForm>
             </VBox>

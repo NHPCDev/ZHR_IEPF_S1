@@ -26,7 +26,14 @@ sap.ui.define([
             oModel.setProperty("/valueState/selectedType", ValueState.None);
             oModel.setProperty("/valueStateText/selectedType", null);
             oModel.setProperty("/selectedType", null);
-
+            // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+            oModel.setProperty("/valueState/finYear", ValueState.None);
+            oModel.setProperty("/valueStateText/finYear", null);
+            oModel.setProperty("/finYear", null);
+            oModel.setProperty("/valueState/monthYear", ValueState.None);
+            oModel.setProperty("/valueStateText/monthYear", null);
+            oModel.setProperty("/monthYear", null);
+            // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             if (!this.oCreateDialog) {
                 this.oCreateDialog = Fragment.load({
                     id: oView.getId(),
@@ -59,12 +66,32 @@ sap.ui.define([
             var oViewModel = this.getView().getModel("viewModel");
             var oResourceBundle = this.getResourceBundle();
             var sType = oViewModel.getProperty("/selectedType");
+            // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+            let sFinYear = oViewModel.getProperty("/finYear");
+            let sMonthYear = oViewModel.getProperty("/monthYear");
+            let isDividend = oViewModel.getProperty("/selectedType") === "D";
+            let isShares = oViewModel.getProperty("/selectedType") === "S";
+            // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             if (!sType) {
                 messenger.error(oResourceBundle.getText("selectTypeErrorMsg"));
                 oViewModel.setProperty("/valueState/selectedType", ValueState.Error);
                 oViewModel.setProperty("/valueStateText/selectedType", oResourceBundle.getText("selectTypeErrorMsg"));
                 return;
             }
+            // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+            if (!sFinYear && isDividend) {
+                messenger.error(oResourceBundle.getText("selectFinYearErrorMsg"));
+                oViewModel.setProperty("/valueState/finYear", ValueState.Error);
+                oViewModel.setProperty("/valueStateText/finYear", oResourceBundle.getText("selectFinYearErrorMsg"));
+                return;
+            }
+            if (!sMonthYear && isShares) {
+                messenger.error(oResourceBundle.getText("selectMonthYearErrorMsg"));
+                oViewModel.setProperty("/valueState/monthYear", ValueState.Error);
+                oViewModel.setProperty("/valueStateText/monthYear", oResourceBundle.getText("selectMonthYearErrorMsg"));
+                return;
+            }
+            // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             oViewModel.setProperty("/valueState/selectedType", ValueState.None);
             oViewModel.setProperty("/valueStateText/selectedType", null);
             oViewModel.setProperty("/requestDetails/Status", "New");
@@ -192,5 +219,25 @@ sap.ui.define([
                 })]
             }
         },
+        // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+        onMonthYearChange: function (oEvent) {
+            let oDatePicker = oEvent.getSource();
+            let sValue = oDatePicker.getValue();
+            let oResourceBundle = this.getResourceBundle();
+            var oRegex = /^(0[1-9]|1[0-2])\.\d{4}$/;
+            if(!sValue){
+                return;
+            }
+            if (!oRegex.test(sValue)) {
+                oDatePicker.setValue("");
+                oDatePicker.setValueState("Error");
+                oDatePicker.setValueStateText(oResourceBundle.getText("pleaseEnterMonthYearinFormat"));
+                messenger.error(oResourceBundle.getText("pleaseEnterMonthYearinFormat"));
+                return;
+            }
+            oDatePicker.setValueState("None");
+            oDatePicker.setValueStateText("");
+        }
+        // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
     });
 });

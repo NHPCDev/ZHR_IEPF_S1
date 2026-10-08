@@ -31,7 +31,7 @@ sap.ui.define([
                     this.byId("objPageHeader").setText(this.getResourceBundle().getText("iepfRequestPage"));
                     this.byId("objPageHeader1").setText(this.getResourceBundle().getText("iepfRequestPage"));
                     this.getDefaultEmployeeDetails();
-                }              
+                }
             }
         },
 
@@ -88,6 +88,15 @@ sap.ui.define([
                     BusyIndicator.hide();
                     if (oResp.results && oResp.results.length > 0) {
                         oViewModel.setProperty("/selectedType", oResp.results[0].UPLOAD_TYPE);
+                        // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+                        let selectedType = oResp.results[0].UPLOAD_TYPE;
+                        if(selectedType === "D"){
+                            oViewModel.setProperty("/finYear", oResp.results[0].FIN_YR);
+                        }
+                        if(selectedType === "S"){
+                            oViewModel.setProperty("/monthYear", oResp.results[0].FOR_MON_YEAR);
+                        }
+                        // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
                         oViewModel.setProperty("/requestDetails/Status", oResp.results[0].STATUS);
                         oViewModel.setProperty("/requestDetails/StatusText", oResp.results[0].STATUS_TEXT);
                         oViewModel.setProperty("/requestDetails/EmployeeId", oResp.results[0].EMP_ID);
@@ -317,6 +326,17 @@ sap.ui.define([
                 HeaderToShares: oViewModel.getProperty("/selectedType") === "S" ? oSharesData : [],
                 HeaderToDividend: oViewModel.getProperty("/selectedType") === "D" ? oDividendData : []
             };
+            // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
+            let isDividendType = oViewModel.getProperty("/selectedType") === "D";
+            let isSharesType = oViewModel.getProperty("/selectedType") === "S";
+            if (isDividendType) {
+                oPayload.FIN_YR = oViewModel.getProperty("/finYear");
+            }
+            if (isSharesType) {
+                var sMonthYear = oViewModel.getProperty("/monthYear");
+                oPayload.FOR_MON_YEAR = sMonthYear; 
+            }
+            // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             if (oViewModel.getProperty("/TransactionId")) {
                 oPayload.TRANS_ID = oViewModel.getProperty("/TransactionId");
             }
@@ -483,7 +503,7 @@ sap.ui.define([
                 appModulePath = jQuery.sap.getModulePath(appPath);
             return appModulePath;
         },
-        
+
         convertArratBufferToBinary: function (aArrayBufferObject) {
             var binary = '';
             const bytes = new Uint8Array(aArrayBufferObject);
