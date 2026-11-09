@@ -6,10 +6,11 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/core/ValueState",
     "com/nhpc/zhriepfs1/utils/formatter",
-    "com/nhpc/zhriepfs1/utils/messenger"
-], (Controller, Filter, FilterOperator, Spreadsheet, Fragment, ValueState, formatter, messenger) => {
+    "com/nhpc/zhriepfs1/utils/messenger",
+    "sap/ui/export/library"
+], (Controller, Filter, FilterOperator, Spreadsheet, Fragment, ValueState, formatter, messenger,exportLibrary) => {
     "use strict";
-
+    var EdmType = exportLibrary.EdmType;
     return Controller.extend("com.nhpc.zhriepfs1.controller.Dashboard", {
         formatter: formatter,
         onInit() {
@@ -33,6 +34,9 @@ sap.ui.define([
             oModel.setProperty("/valueState/monthYear", ValueState.None);
             oModel.setProperty("/valueStateText/monthYear", null);
             oModel.setProperty("/monthYear", null);
+            oModel.setProperty("/valueState/submitType", ValueState.None);
+            oModel.setProperty("/valueStateText/submitType", null);
+            oModel.setProperty("/submitType", null);
             // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             if (!this.oCreateDialog) {
                 this.oCreateDialog = Fragment.load({
@@ -68,6 +72,7 @@ sap.ui.define([
             var sType = oViewModel.getProperty("/selectedType");
             // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             let sFinYear = oViewModel.getProperty("/finYear");
+            let sSubmitType = oViewModel.getProperty("/submitType");
             let sMonthYear = oViewModel.getProperty("/monthYear");
             let isDividend = oViewModel.getProperty("/selectedType") === "D";
             let isShares = oViewModel.getProperty("/selectedType") === "S";
@@ -79,16 +84,22 @@ sap.ui.define([
                 return;
             }
             // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
-            if (!sFinYear && isDividend) {
+            if (isDividend && (!sFinYear || !sSubmitType)) {
+                if (!sFinYear) {
+                    oViewModel.setProperty("/valueState/finYear", ValueState.Error);
+                    oViewModel.setProperty("/valueStateText/finYear", oResourceBundle.getText("selectFinYearErrorMsg"));
+                }
+                if (!sSubmitType) {
+                    oViewModel.setProperty("/valueState/submitType", ValueState.Error);
+                    oViewModel.setProperty("/valueStateText/submitType", oResourceBundle.getText("selectSubmitTypeErrorMsg"));
+                }
+                messenger.error(oResourceBundle.getText("filAllFieldsErrorMsg"));
+                return;
+            }
+            if (!sFinYear && isShares) {
                 messenger.error(oResourceBundle.getText("selectFinYearErrorMsg"));
                 oViewModel.setProperty("/valueState/finYear", ValueState.Error);
                 oViewModel.setProperty("/valueStateText/finYear", oResourceBundle.getText("selectFinYearErrorMsg"));
-                return;
-            }
-            if (!sMonthYear && isShares) {
-                messenger.error(oResourceBundle.getText("selectMonthYearErrorMsg"));
-                oViewModel.setProperty("/valueState/monthYear", ValueState.Error);
-                oViewModel.setProperty("/valueStateText/monthYear", oResourceBundle.getText("selectMonthYearErrorMsg"));
                 return;
             }
             // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
@@ -112,7 +123,7 @@ sap.ui.define([
 
         onListItemPress: function (oEvent) {
             this.getOwnerComponent().getRouter().navTo("RouteDetail", {
-                TransactionId:  oEvent.getSource().getBindingContext().getObject("TRANS_ID")
+                TransactionId: oEvent.getSource().getBindingContext().getObject("TransId")
             });
         },
 
@@ -151,27 +162,30 @@ sap.ui.define([
             var aCols = [];
             aCols.push({
                 label: this.getResourceBundle().getText("transactionId"),
-                property: "TRANS_ID"
+                property: "TransId"
             });
             aCols.push({
                 label: this.getResourceBundle().getText("type"),
-                property: "UPLOAD_TYPE_TEXT"
+                property: "uploadtypetext"
             });
             aCols.push({
                 label: this.getResourceBundle().getText("createdBy"),
-                property: "UPLOADED_BY"
+                property: "Empid"
             });
             aCols.push({
                 label: this.getResourceBundle().getText("createdByName"),
-                property: "UPLOADED_BY_NAME"
+                property: "Empname"
             });
             aCols.push({
                 label: this.getResourceBundle().getText("createdOn"),
-                property: "UPLOADED_DATE"
+                property: "Uploadeddate",
+                type: EdmType.Date,
+                inputFormat: "yyyymmdd",
+                format: "dd.mm.yyyy"
             });
             aCols.push({
                 label: this.getResourceBundle().getText("status"),
-                property: "STATUS_TEXT"
+                property: "Statustext"
             });
             return aCols;
         },
@@ -189,7 +203,7 @@ sap.ui.define([
 
             if (oFilterData.TRANS_ID) {
                 let aFilters = [];
-                aFilters.push(new Filter("TRANS_ID", FilterOperator.Contains, oFilterData.TRANS_ID));
+                aFilters.push(new Filter("TransId", FilterOperator.Contains, oFilterData.TRANS_ID));
                 aSearchFilter.push(new Filter({
                     filters: aFilters,
                     and: false
@@ -197,7 +211,7 @@ sap.ui.define([
             }
             if (oFilterData.UPLOADED_DATE) {
                 let aFilters = [];
-                aFilters.push(new Filter("UPLOADED_DATE", FilterOperator.EQ, oFilterData.UPLOADED_DATE));
+                aFilters.push(new Filter("Uploadeddate", FilterOperator.EQ, oFilterData.UPLOADED_DATE));
                 aSearchFilter.push(new Filter({
                     filters: aFilters,
                     and: false
@@ -205,7 +219,7 @@ sap.ui.define([
             }
             if (oFilterData.STATUS) {
                 let aFilters = [];
-                aFilters.push(new Filter("STATUS", FilterOperator.EQ, oFilterData.STATUS));
+                aFilters.push(new Filter("Status", FilterOperator.EQ, oFilterData.STATUS));
                 aSearchFilter.push(new Filter({
                     filters: aFilters,
                     and: false
@@ -225,7 +239,7 @@ sap.ui.define([
             let sValue = oDatePicker.getValue();
             let oResourceBundle = this.getResourceBundle();
             var oRegex = /^(0[1-9]|1[0-2])\.\d{4}$/;
-            if(!sValue){
+            if (!sValue) {
                 return;
             }
             if (!oRegex.test(sValue)) {

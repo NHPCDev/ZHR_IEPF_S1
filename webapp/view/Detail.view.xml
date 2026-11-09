@@ -70,6 +70,16 @@
                                         </VBox>
                                     </HBox>
                                 </uxap:snappedHeading>
+                                <uxap:actions>
+                                    <Button
+                                        id="_IDGenButton11"
+                                        text="{i18n>deleteBtnText}"
+                                        icon="sap-icon://delete"
+                                        visible="{= ${viewModel>/requestDetails/Status} === '01' || ${viewModel>/requestDetails/Status} === '02' }"
+                                        press="onDelete"
+                                        type="Reject"
+                                    />
+                                </uxap:actions>
                             </uxap:ObjectPageDynamicHeaderTitle>
                         </uxap:headerTitle>
                         <uxap:headerContent>
@@ -125,18 +135,11 @@
                     <OverflowToolbar>
                         <ToolbarSpacer />
                         <Button
-                            text="{i18n>interimSubmitBtnText}"
-                            type="Critical"
-                            press="handleInterimSubmitBtnPress"
-                            icon="sap-icon://save"
-                            visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
-                        />
-                        <Button
-                            text="{i18n>finalSubmitBtnText}"
+                            text="{i18n>submitBtnText}"
                             type="Success"
                             press="handleSubmitBtnPress"
                             icon="sap-icon://create"
-                            visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
+                            visible="{= ${viewModel>/requestDetails/Status} !== '01' &amp;&amp; ${viewModel>/requestDetails/Status} !== '02' }"
                         />
                     </OverflowToolbar>
                 </footer>

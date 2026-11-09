@@ -15,12 +15,12 @@
     >
         <content>
             <VBox>
-            <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
+                <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                 <f:SimpleForm
                     editable="true"
                     layout="ColumnLayout"
                 >
-            <!-- End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
+                    <!-- End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                     <f:content>
                         <Label
                             text="{i18n>chooseType}"
@@ -42,6 +42,44 @@
                         </ComboBox>
                         <!-- Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added -->
                         <Label
+                            text="{i18n>submitType}"
+                            required="true"
+                        />
+                        <ComboBox
+                            width="100%"
+                            selectedItem="{viewModel>/submitType}"
+                            selectedKey="{viewModel>/submitType}"
+                            change="onComboboxChange"
+                            items="{path: '/ZHCM_CDS_IEPF_SUBMITTYPE'}"
+                            valueState="{viewModel>/valueState/submitType}"
+                            valueStateText="{viewModel>/valueStateText/submitType}"
+                            visible="{= ${viewModel>/selectedType} === 'D'}"
+                        >
+                            <core:ListItem
+                                key="{StatusValue}"
+                                text="{StatusText}"
+                            />
+                        </ComboBox>
+                        <Label
+                            text="{i18n>iepfType}"
+                            required="true"
+                        />
+                        <ComboBox
+                            width="100%"
+                            selectedItem="{viewModel>/iepfType}"
+                            selectedKey="{viewModel>/iepfType}"
+                            change="onComboboxChange"
+                            items="{path: '/ZHCM_IEPF_CDS_FINYEAR_F4H'}"
+                            valueState="{viewModel>/valueState/iepfType}"
+                            valueStateText="{viewModel>/valueStateText/iepfType}"
+                            visible="{= ${viewModel>/selectedType} === 'D' || ${viewModel>/selectedType} === 'S'}"
+                        >
+                            <core:ListItem
+                                key="{finyear}"
+                                text="{finyear}"
+                            />
+                        </ComboBox>
+                        <Label
                             text="{i18n>finYear}"
                             required="true"
                         />
@@ -53,7 +91,7 @@
                             items="{path: '/ZHCM_IEPF_CDS_FINYEAR_F4H'}"
                             valueState="{viewModel>/valueState/finYear}"
                             valueStateText="{viewModel>/valueStateText/finYear}"
-                            visible="{= ${viewModel>/selectedType} === 'D'}"
+                            visible="{= ${viewModel>/selectedType} === 'D' || ${viewModel>/selectedType} === 'S'}"
                         >
                             <core:ListItem
                                 key="{finyear}"
@@ -69,7 +107,7 @@
                             displayFormat="MM.yyyy"
                             valueFormat="MM.yyyy"
                             value="{viewModel>/monthYear}"
-                            visible="{= ${viewModel>/selectedType} === 'S'}"
+                            visible="false"
                             change="onMonthYearChange"
                             valueState="{viewModel>/valueState/monthYear}"
                             valueStateText="{viewModel>/valueStateText/monthYear}"

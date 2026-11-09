@@ -25,9 +25,9 @@ sap.ui.define([
             if (sTransactionId) {
                 this.getTransactionDetails(sTransactionId);
             } else {
-                if(!oViewModel.getProperty("/selectedType")) {
+                if (!oViewModel.getProperty("/selectedType")) {
                     this.getOwnerComponent().getRouter().navTo("RouteDashboard", {}, {}, true);
-                }else{
+                } else {
                     this.byId("objPageHeader").setText(this.getResourceBundle().getText("iepfRequestPage"));
                     this.byId("objPageHeader1").setText(this.getResourceBundle().getText("iepfRequestPage"));
                     this.getDefaultEmployeeDetails();
@@ -40,27 +40,24 @@ sap.ui.define([
                 oViewModel = this.getView().getModel("viewModel");
             BusyIndicator.show(0);
             oViewModel.setProperty("/TransactionId", "");
-            oModel.read("/HeaderSet", {
-                urlParameters: {
-                    "$expand": "HeaderToShares,HeaderToDividend"
-                },
+            oModel.read("/ZHCM_CDS_IEPF_EMPLOGGEDINFO", {
                 success: function (oResp) {
                     BusyIndicator.hide();
                     if (oResp.results && oResp.results.length > 0) {
                         var oViewModel = this.getView().getModel("viewModel");
-                        oViewModel.setProperty("/requestDetails/EmployeeId", oResp.results[0].EMP_ID);
-                        oViewModel.setProperty("/requestDetails/EmployeeName", oResp.results[0].EMP_NAME);
+                        oViewModel.setProperty("/requestDetails/EmployeeId", oResp.results[0].PERNR);
+                        oViewModel.setProperty("/requestDetails/EmployeeName", oResp.results[0].ENAME);
                         oViewModel.setProperty("/requestDetails/CompanyCode", oResp.results[0].BUKRS);
-                        oViewModel.setProperty("/requestDetails/EmployeeGrade", oResp.results[0].EMP_GRADE_CODE);
-                        oViewModel.setProperty("/requestDetails/EmployeeSubgrp", oResp.results[0].EMP_SUB_GROUP);
-                        oViewModel.setProperty("/requestDetails/EmployeeSubgrpText", oResp.results[0].EMP_SUB_GROUP_TEXT);
-                        oViewModel.setProperty("/requestDetails/PersonnelSubArea", oResp.results[0].EMP_SUB_AREA);
-                        oViewModel.setProperty("/requestDetails/PersonnelSubAreaText", oResp.results[0].EMP_SUB_AREA_TEXT);
-                        oViewModel.setProperty("/requestDetails/Department", oResp.results[0].EMP_DEPT);
-                        oViewModel.setProperty("/requestDetails/PositionText", oResp.results[0].EMP_POSITION);
+                        oViewModel.setProperty("/requestDetails/EmployeeGrade", oResp.results[0].GRADE_CODE);
+                        oViewModel.setProperty("/requestDetails/EmployeeSubgrp", oResp.results[0].SUB_GROUP);
+                        oViewModel.setProperty("/requestDetails/EmployeeSubgrpText", oResp.results[0].SUB_GROUP_TEXT);
+                        oViewModel.setProperty("/requestDetails/PersonnelSubArea", oResp.results[0].SUB_AREA);
+                        oViewModel.setProperty("/requestDetails/PersonnelSubAreaText", oResp.results[0].SUB_AREA_TEXT);
+                        oViewModel.setProperty("/requestDetails/Department", oResp.results[0].DEP_CODE);
+                        oViewModel.setProperty("/requestDetails/PositionText", oResp.results[0].DESIG);
 
                         var oRespData = $.extend(true, {}, oResp.results[0]);
-                        this.setTransactionData(oRespData);
+                        // this.setTransactionData(oRespData);
                     }
                 }.bind(this),
                 error: function (oError) {
@@ -78,40 +75,41 @@ sap.ui.define([
                 aFilters = [];
 
             BusyIndicator.show(0);
-            aFilters.push(new Filter("TRANS_ID", FilterOperator.EQ, sTransactionId));
-            oModel.read("/HeaderSet", {
-                filters: aFilters,
+            aFilters.push(new Filter("TransId", FilterOperator.EQ, sTransactionId));
+            oModel.read(`/ZHCM_CDS_IEPF_HEADER('${sTransactionId}')`, {
+                // filters: aFilters,
                 urlParameters: {
-                    "$expand": "HeaderToShares,HeaderToDividend"
+                    "$expand": "to_share,to_dividend"
                 },
                 success: function (oResp) {
                     BusyIndicator.hide();
-                    if (oResp.results && oResp.results.length > 0) {
-                        oViewModel.setProperty("/selectedType", oResp.results[0].UPLOAD_TYPE);
+                    if (oResp) {
+                        oViewModel.setProperty("/selectedType", oResp.Uploadtype);
                         // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
-                        let selectedType = oResp.results[0].UPLOAD_TYPE;
-                        if(selectedType === "D"){
-                            oViewModel.setProperty("/finYear", oResp.results[0].FIN_YR);
+                        let selectedType = oResp.Uploadtype;
+                        if (selectedType === "D") {
+                            oViewModel.setProperty("/finYear", oResp.Finyr);
                         }
-                        if(selectedType === "S"){
-                            oViewModel.setProperty("/monthYear", oResp.results[0].FOR_MON_YEAR);
+                        if (selectedType === "S") {
+                            oViewModel.setProperty("/monthYear", oResp.Formonyear);
                         }
                         // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
-                        oViewModel.setProperty("/requestDetails/Status", oResp.results[0].STATUS);
-                        oViewModel.setProperty("/requestDetails/StatusText", oResp.results[0].STATUS_TEXT);
-                        oViewModel.setProperty("/requestDetails/EmployeeId", oResp.results[0].EMP_ID);
-                        oViewModel.setProperty("/requestDetails/EmployeeName", oResp.results[0].EMP_NAME);
-                        oViewModel.setProperty("/requestDetails/CompanyCode", oResp.results[0].BUKRS);
-                        oViewModel.setProperty("/requestDetails/EmployeeGrade", oResp.results[0].EMP_GRADE_CODE);
-                        oViewModel.setProperty("/requestDetails/EmployeeSubgrp", oResp.results[0].EMP_SUB_GROUP);
-                        oViewModel.setProperty("/requestDetails/EmployeeSubgrpText", oResp.results[0].EMP_SUB_GROUP_TEXT);
-                        oViewModel.setProperty("/requestDetails/PersonnelSubArea", oResp.results[0].EMP_SUB_AREA);
-                        oViewModel.setProperty("/requestDetails/PersonnelSubAreaText", oResp.results[0].EMP_SUB_AREA_TEXT);
-                        oViewModel.setProperty("/requestDetails/Department", oResp.results[0].EMP_DEPT);
-                        oViewModel.setProperty("/requestDetails/PositionText", oResp.results[0].EMP_POSITION);
+                        oViewModel.setProperty("/requestDetails/Status", oResp.Status);
+                        oViewModel.setProperty("/requestDetails/StatusText", oResp.Statustext);
+                        oViewModel.setProperty("/requestDetails/EmployeeId", oResp.Empid);
+                        oViewModel.setProperty("/requestDetails/EmployeeName", oResp.Empname);
+                        oViewModel.setProperty("/requestDetails/CompanyCode", oResp.Compcode);
+                        oViewModel.setProperty("/requestDetails/EmployeeGrade", oResp.Empgradecode);
+                        oViewModel.setProperty("/requestDetails/EmployeeSubgrp", oResp.Empsubgrp);
+                        oViewModel.setProperty("/requestDetails/EmployeeSubgrpText", oResp.Empsubgrptxt);
+                        oViewModel.setProperty("/requestDetails/PersonnelSubArea", oResp.Empsubarea);
+                        oViewModel.setProperty("/requestDetails/PersonnelSubAreaText", oResp.Empsubareatext);
+                        oViewModel.setProperty("/requestDetails/Department", oResp.Empdept);
+                        oViewModel.setProperty("/requestDetails/PositionText", oResp.Empposition);
+                        oViewModel.setProperty("/submitType", oResp.Status)
                         this.byId("objPageHeader").setText(this.getResourceBundle().getText("createdIEPFRequest", [sTransactionId]));
                         this.byId("objPageHeader1").setText(this.getResourceBundle().getText("createdIEPFRequest", [sTransactionId]));
-                        var oRespData = $.extend(true, {}, oResp.results[0]);
+                        var oRespData = $.extend(true, {}, oResp);
                         this.setTransactionData(oRespData);
                     }
                 }.bind(this),
@@ -131,22 +129,65 @@ sap.ui.define([
                 .getResourceBundle();
         },
 
-        processUploadedData: function (data) {
-            let oViewModel = this.getView().getModel("viewModel");
-            var oResourceBundle = this.getResourceBundle();
-            let selectedType = oViewModel.getProperty("/selectedType");
+        processUploadedData: function (data, sheetName) {
+            const oViewModel = this.getView().getModel("viewModel");
+            const oResourceBundle = this.getResourceBundle();
+            const selectedType = oViewModel.getProperty("/selectedType");
             if (!data || data.length === 0) {
                 messenger.error(oResourceBundle.getText("noDataFoundInFileMsg"));
                 return;
             }
+            let columnMapping = {};
+            if (sheetName === "IEPFSharesList") {
+                columnMapping = {
+                    "DP-ID": "Invdpid",
+                    "Client ID": "Invclientid",
+                    "Folio Number": "Invfolionumber",
+                    "Investor First Name": "Invfname",
+                    "Investor Middle Name": "Invsmname",
+                    "Investor Last Name": "Invlname",
+                    "Father/Husband First Name": "Invfhfname",
+                    "Father/Husband Middle Name": "Invfhmname",
+                    "Father/Husband Last Name": "Invfhlname",
+                    "Address": "Invaddress",
+                    "Country": "Invcountry",
+                    "State": "Invstate",
+                    "District": "Invdistrict",
+                    "PIN Code": "Invpincode",
+                    "Number of Shares": "Invnoofshares",
+                    "Nominal Value of Shares": "Invnominalvalueofshare",
+                    "Actual Date of Transfer to IEPF": "Invdateofsharetransfer2iepf"
+                };
+            } else if (sheetName === "IEPFDividendList") {
+                columnMapping = {
+                    "DP-ID": "Invdpid",
+                    "Client ID": "Invclientid",
+                    "Folio Number": "Invfolionumber",
+                    "Investor First Name": "Invfname",
+                    "Investor Middle Name": "Invsmname",
+                    "Investor Last Name": "Invlname",
+                    "Father/Husband First Name": "Invfhfname",
+                    "Father/Husband Middle Name": "Invfhmname",
+                    "Father/Husband Last Name": "Invfhlname",
+                    "Address": "Invaddress",
+                    "Country": "Invcountry",
+                    "State": "Invstate",
+                    "District": "Invdistrict",
+                    "PIN Code": "Invpincode",
+                    "Investment Type": "Investmenttype",
+                    "Amount Transferred": "Invamounttransfered",
+                    "Date of Event": "Invdateofevent"
+                };
+            }
             const requiredColumns = [
-                "DP_ID_CLIENT_ID_FOLIO_NO",
-                "INVESTORS_NAME"
+                // "DP-ID Client-ID Account Number",
+                // "Folio Number"
             ];
             const invalidRows = [];
             data.forEach(function (row, index) {
                 const missingFields = requiredColumns.filter(function (column) {
-                    return row[column] == null || String(row[column]).trim() === "";
+                    return row[column] == null ||
+                        String(row[column]).trim() === "";
                 });
                 if (missingFields.length > 0) {
                     invalidRows.push(
@@ -161,100 +202,90 @@ sap.ui.define([
                 );
                 return;
             }
-            data = data.map(function (row) { const newRow = {}; Object.keys(row).forEach(function (key) { newRow[key] = row[key] == null ? "" : String(row[key]); }); return newRow; });
-            this._uploadedData = data;
+            const mappedData = data.map(function (row) {
+                const newRow = {};
+                Object.keys(columnMapping).forEach(function (excelColumn) {
+                    const backendField = columnMapping[excelColumn];
+                    const value = row[excelColumn];
+                    newRow[backendField] =
+                        value == null ? "" : String(value);
+                });
+                return newRow;
+            });
+            this._uploadedData = mappedData;
             if (selectedType === "S") {
-                this.getView().getModel("sharesModel").setProperty("/data", data);
+                const oModel = this.getView().getModel("sharesModel");
+                oModel.setProperty("/data", mappedData);
                 const oTable = this.byId("idSharesTable");
                 const oRowMode = oTable.getRowMode();
-                const iCount = this.getView().getModel("sharesModel").getProperty("/data").length;
-                if (iCount > 0) {
-                    oRowMode.setRowCount(Math.min(iCount, 5));
+                if (mappedData.length > 0) {
+                    oRowMode.setRowCount(Math.min(mappedData.length, 5));
                 }
             } else if (selectedType === "D") {
-                this.getView().getModel("dividendModel").setProperty("/data", data);
+                const oModel = this.getView().getModel("dividendModel");
+                oModel.setProperty("/data", mappedData);
+
                 const oTable = this.byId("idDividendTable");
                 const oRowMode = oTable.getRowMode();
-                const iCount = this.getView().getModel("dividendModel").getProperty("/data").length;
-                if (iCount > 0) {
-                    oRowMode.setRowCount(Math.min(iCount, 5));
+
+                if (mappedData.length > 0) {
+                    oRowMode.setRowCount(Math.min(mappedData.length, 5));
                 }
             }
-            messenger.success(data.length + " " + oResourceBundle.getText("recordsUploadedSuccessfullyMsg"));
-            this.getView().getModel("viewModel").refresh(true);
+            messenger.success(
+                mappedData.length + " " +
+                oResourceBundle.getText("recordsUploadedSuccessfullyMsg")
+            );
+            oViewModel.refresh(true);
         },
 
         onDownload: function () {
             const sSelectedType = this.getView().getModel("viewModel").getProperty("/selectedType");
-            var oResourceBundle = this.getResourceBundle();
+            const oResourceBundle = this.getResourceBundle();
             let aData = [];
             let aColumns = [];
             if (sSelectedType === "S") {
                 aData = this.getView().getModel("sharesModel").getProperty("/data");
                 aColumns = [
-                    {
-                        label: oResourceBundle.getText("dpIdClientIdFolioNo"),
-                        property: "DP_ID_CLIENT_ID_FOLIO_NO"
-                    },
-                    {
-                        label: oResourceBundle.getText("investorsName"),
-                        property: "INVESTORS_NAME"
-                    },
-                    {
-                        label: oResourceBundle.getText("totalShares"),
-                        property: "TOTAL_SHARES"
-                    },
-                    {
-                        label: oResourceBundle.getText("remarks"),
-                        property: "REMARKS"
-                    }
+                    { label: oResourceBundle.getText("dpIdClientIdAccountNumber"), property: "Invdpidclientidaccntnum" },
+                    { label: oResourceBundle.getText("folioNumber"), property: "Invfolionumber" },
+                    { label: oResourceBundle.getText("investorFirstName"), property: "Invfname" },
+                    { label: oResourceBundle.getText("investorMiddleName"), property: "Invsmname" },
+                    { label: oResourceBundle.getText("investorLastName"), property: "Invlname" },
+                    { label: oResourceBundle.getText("fatherHusbandFirstName"), property: "Invfhfname" },
+                    { label: oResourceBundle.getText("fatherHusbandMiddleName"), property: "Invfhmname" },
+                    { label: oResourceBundle.getText("fatherHusbandLastName"), property: "Invfhlname" },
+                    { label: oResourceBundle.getText("address"), property: "Invaddress" },
+                    { label: oResourceBundle.getText("country"), property: "Invcountry" },
+                    { label: oResourceBundle.getText("state"), property: "Invstate" },
+                    { label: oResourceBundle.getText("district"), property: "Invdistrict" },
+                    { label: oResourceBundle.getText("pinCode"), property: "Invpincode" },
+                    { label: oResourceBundle.getText("numberOfShares"), property: "Invnoofshares" },
+                    { label: oResourceBundle.getText("nominalValueOfShares"), property: "Invnominalvalueofshare" },
+                    { label: oResourceBundle.getText("actualDateOfTransferToIEPF"), property: "Invdateofsharetransfer2iepf" }
                 ];
             } else {
                 aData = this.getView().getModel("dividendModel").getProperty("/data");
                 aColumns = [
-                    {
-                        label: oResourceBundle.getText("dpIdClientIdFolioNo"),
-                        property: "DP_ID_CLIENT_ID_FOLIO_NO"
-                    },
-                    {
-                        label: oResourceBundle.getText("investorsName"),
-                        property: "INVESTORS_NAME"
-                    },
-                    {
-                        label: oResourceBundle.getText("dividendAmount"),
-                        property: "DIVIDEND_AMOUNT"
-                    },
-                    {
-                        label: oResourceBundle.getText("address1"),
-                        property: "ADDRESS1"
-                    },
-                    {
-                        label: oResourceBundle.getText("address2"),
-                        property: "ADDRESS2"
-                    },
-                    {
-                        label: oResourceBundle.getText("address3"),
-                        property: "ADDRESS3"
-                    },
-                    {
-                        label: oResourceBundle.getText("address4"),
-                        property: "ADDRESS4"
-                    },
-                    {
-                        label: oResourceBundle.getText("pin"),
-                        property: "PIN"
-                    },
-                    {
-                        label: oResourceBundle.getText("dueDate"),
-                        property: "Due_Date"
-                    },
-                    {
-                        label: oResourceBundle.getText("remarks"),
-                        property: "REMARKS"
-                    }
+                    { label: oResourceBundle.getText("dpIdClientIdAccountNumber"), property: "Invdpidclientidaccntnum" },
+                    { label: oResourceBundle.getText("folioNumber"), property: "Invfolionumber" },
+                    { label: oResourceBundle.getText("investorFirstName"), property: "Invfname" },
+                    { label: oResourceBundle.getText("investorMiddleName"), property: "Invsmname" },
+                    { label: oResourceBundle.getText("investorLastName"), property: "Invlname" },
+                    { label: oResourceBundle.getText("fatherHusbandFirstName"), property: "Invfhfname" },
+                    { label: oResourceBundle.getText("fatherHusbandMiddleName"), property: "Invfhmname" },
+                    { label: oResourceBundle.getText("fatherHusbandLastName"), property: "Invfhlname" },
+                    { label: oResourceBundle.getText("address"), property: "Invaddress" },
+                    { label: oResourceBundle.getText("country"), property: "Invcountry" },
+                    { label: oResourceBundle.getText("state"), property: "Invstate" },
+                    { label: oResourceBundle.getText("district"), property: "Invdistrict" },
+                    { label: oResourceBundle.getText("pinCode"), property: "Invpincode" },
+                    { label: oResourceBundle.getText("investmentType"), property: "Investmenttype" },
+                    { label: oResourceBundle.getText("amountTransferred"), property: "Invamounttransfered" },
+                    { label: oResourceBundle.getText("dateOfEvent"), property: "Invdateofevent" }
                 ];
             }
-            if (!aData.length) {
+            if (!aData || !aData.length) {
                 messenger.error(oResourceBundle.getText("noDataToDownloadMsg"));
                 return;
             }
@@ -285,7 +316,7 @@ sap.ui.define([
                     BusyIndicator.show(0);
                     var oModel = this.getView().getModel(),
                         oPayload = this.createRequestPayload();
-                    oModel.create("/HeaderSet", oPayload, {
+                    oModel.create("/ZHCM_CDS_IEPF_HEADER", oPayload, {
                         success: function (oResp) {
                             if (oResp.TRANS_ID) {
                                 this.TRANS_ID = oResp.TRANS_ID;
@@ -312,33 +343,38 @@ sap.ui.define([
                 oSharesData = oShareModel.getProperty("/data"),
                 oDividendData = oDividendModel.getProperty("/data");
             var oPayload = {
-                UPLOAD_TYPE: oViewModel.getProperty("/selectedType"),
-                STATUS: this.sActionFlag === "Interim" ? "01" : "02",
-                EMP_ID: oRequestDetails.EmployeeId,
-                EMP_NAME: oRequestDetails.EmployeeName,
-                BUKRS: oRequestDetails.CompanyCode,
-                EMP_GRADE_CODE: oRequestDetails.EmployeeGrade,
-                EMP_SUB_GROUP: oRequestDetails.EmployeeSubgrp,
-                EMP_SUB_AREA: oRequestDetails.PersonnelSubArea,
-                EMP_SUB_AREA_TEXT: oRequestDetails.PersonnelSubAreaText,
-                EMP_DEPT: oRequestDetails.Department,
-                EMP_POSITION: oRequestDetails.PositionText,
-                HeaderToShares: oViewModel.getProperty("/selectedType") === "S" ? oSharesData : [],
-                HeaderToDividend: oViewModel.getProperty("/selectedType") === "D" ? oDividendData : []
+                Uploadtype: oViewModel.getProperty("/selectedType"),
+                // Status: this.sActionFlag === "Interim" ? "01" : "02",
+                Status: oViewModel.getProperty("/submitType") === "01" ? "01" : "02",
+                Empid: oRequestDetails.EmployeeId,
+                Empname: oRequestDetails.EmployeeName,
+                Compcode: oRequestDetails.CompanyCode,
+                Empgradecode: oRequestDetails.EmployeeGrade,
+                Empsubgrp: oRequestDetails.EmployeeSubgrp,
+                Empsubgrptxt: oRequestDetails.EmployeeSubgrpText,
+                Empsubarea: oRequestDetails.PersonnelSubArea,
+                Empsubareatext: oRequestDetails.PersonnelSubAreaText,
+                Empdept: oRequestDetails.Department,
+                Empposition: oRequestDetails.PositionText,
+                to_share: oViewModel.getProperty("/selectedType") === "S" ? oSharesData : [],
+                to_dividend: oViewModel.getProperty("/selectedType") === "D" ? oDividendData : []
             };
             // Start of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             let isDividendType = oViewModel.getProperty("/selectedType") === "D";
             let isSharesType = oViewModel.getProperty("/selectedType") === "S";
             if (isDividendType) {
-                oPayload.FIN_YR = oViewModel.getProperty("/finYear");
+                oPayload.Finyr = oViewModel.getProperty("/finYear");
             }
             if (isSharesType) {
-                var sMonthYear = oViewModel.getProperty("/monthYear");
-                oPayload.FOR_MON_YEAR = sMonthYear; 
+                oPayload.Finyr = oViewModel.getProperty("/finYear");
+                // var sMonthYear = oViewModel.getProperty("/monthYear");
+                // oPayload.Formonyear = sMonthYear;
             }
             // End of Change: 08.10.2026 : Balamurugan : Financial Year and Month-Year Fields Added
             if (oViewModel.getProperty("/TransactionId")) {
-                oPayload.TRANS_ID = oViewModel.getProperty("/TransactionId");
+                oPayload.TransId = oViewModel.getProperty("/TransactionId");
+            } else {
+                oPayload.TransId = "";
             }
             return oPayload;
         },
@@ -354,12 +390,12 @@ sap.ui.define([
                     BusyIndicator.show(0);
                     this.sActionFlag = "Submitted";
                     let oPayload = this.createRequestPayload();
-                    oModel.create("/HeaderSet", oPayload, {
+                    oModel.create("/ZHCM_CDS_IEPF_HEADER", oPayload, {
                         success: function (oResp) {
-                            if (oResp.TRANS_ID) {
-                                this.TRANS_ID = oResp.TRANS_ID;
+                            if (oResp.TransId) {
+                                this.TRANS_ID = oResp.TransId;
                                 BusyIndicator.hide();
-                                messenger.success(oResourceBundle.getText("iepfRequestFinalSuccessMsg", oResp.TRANS_ID), () => {
+                                messenger.success(oResourceBundle.getText("iepfRequestFinalSuccessMsg", oResp.TransId), () => {
                                     this.getOwnerComponent().getRouter().navTo("RouteDashboard", {}, {}, true);
                                 });
                             }
@@ -400,7 +436,7 @@ sap.ui.define([
             var oViewModel = this.getView().getModel("viewModel");
             let selectedType = oViewModel.getProperty("/selectedType");
             if (selectedType === "S") {
-                this.getView().getModel("sharesModel").setProperty("/data", oRespData.HeaderToShares.results);
+                this.getView().getModel("sharesModel").setProperty("/data", oRespData.to_share.results);
                 const oTable = this.byId("idSharesTable");
                 const oRowMode = oTable.getRowMode();
                 const iCount = this.getView().getModel("sharesModel").getProperty("/data").length;
@@ -408,7 +444,7 @@ sap.ui.define([
                     oRowMode.setRowCount(Math.min(iCount, 5));
                 }
             } else if (selectedType === "D") {
-                this.getView().getModel("dividendModel").setProperty("/data", oRespData.HeaderToDividend.results);
+                this.getView().getModel("dividendModel").setProperty("/data", oRespData.to_dividend.results);
                 const oTable = this.byId("idDividendTable");
                 const oRowMode = oTable.getRowMode();
                 const iCount = this.getView().getModel("dividendModel").getProperty("/data").length;
@@ -423,7 +459,7 @@ sap.ui.define([
             var oResourceBundle = this.getResourceBundle();
             if (sType === "S") {
                 const sUrl = sap.ui.require.toUrl(
-                    "com/nhpc/zhriepfs1/templates/IEPF-SHARES-UploadTemplateExcel.xls"
+                    "com/nhpc/zhriepfs1/templates/IEPF-SHARES-UploadTemplateExcel.xlsx"
                 );
                 const oLink = document.createElement("a");
                 oLink.href = sUrl;
@@ -433,7 +469,7 @@ sap.ui.define([
                 document.body.removeChild(oLink);
             } else if (sType === "D") {
                 const sUrl = sap.ui.require.toUrl(
-                    "com/nhpc/zhriepfs1/templates/IEPF-Dividend-UploadTemplateExcel.xlsx"
+                    "com/nhpc/zhriepfs1/templates/IEPF-Dividend-UploadTemplateExcel.xlsm"
                 );
                 const oLink = document.createElement("a");
                 oLink.href = sUrl;
@@ -521,14 +557,23 @@ sap.ui.define([
             });
             workbook.SheetNames.forEach(
                 function (sheetName) {
-                    var aExcelData = XLSX.utils.sheet_to_row_object_array(
-                        workbook.Sheets[sheetName]
-                    );
+                    if (sheetName === "IEPFDividendList" || sheetName === "IEPFSharesList") {
+                        var aExcelData = XLSX.utils.sheet_to_row_object_array(
+                            workbook.Sheets[sheetName]
+                        );
+                        BusyIndicator.hide();
+                        this.processUploadedData(aExcelData, sheetName);
+                    }
                     BusyIndicator.hide();
-                    this.processUploadedData(aExcelData);
                 }.bind(this)
             );
         },
+
+        onDelete: function(){
+            let oViewModel = this.getView().getModel("viewModel");
+            let oResourceBundle = this.getResourceBundle();
+            //OData call need to be added
+        }
 
     });
 });

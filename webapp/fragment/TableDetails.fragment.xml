@@ -13,6 +13,7 @@
         width="auto"
         visible="{= ${viewModel>/selectedType} === 'S'}"
         alternateRowColors="true"
+        fixedColumnCount="2"
     >
         <table:extension>
             <OverflowToolbar>
@@ -28,7 +29,7 @@
                     press="onDownloadTemplate"
                     icon="sap-icon://download"
                     type="Reject"
-                    visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} !== '01' &amp;&amp; ${viewModel>/requestDetails/Status} !== '02' }"
                 />
 
                 <unified:FileUploader
@@ -41,7 +42,7 @@
                     icon="sap-icon://upload"
                     iconFirst="true"
                     change="onFileChange"
-                    visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} !== '01' &amp;&amp; ${viewModel>/requestDetails/Status} !== '02' }"
                     style="Accept"
                     buttonText="{i18n>uploadBtnText}"
                 />
@@ -49,7 +50,7 @@
                     id="_IDGenButton"
                     text="{i18n>downloadReportBtnText}"
                     icon="sap-icon://excel-attachment"
-                    visible="{= ${viewModel>/requestDetails/Status} === '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} === '01'|| ${viewModel>/requestDetails/Status} === '02' }"
                     press="onDownload"
                     type="Reject"
                 />
@@ -63,51 +64,173 @@
             />
         </table:rowMode>
         <table:columns>
-            <table:Column id="_IDGenColumn">
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel"
-                    text="{i18n>dpIdClientIdFolioNo}"
+                    text="{i18n>dpId}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText"
-                        text="{sharesModel>DP_ID_CLIENT_ID_FOLIO_NO}"
+                        text="{sharesModel>Invdpid}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column id="_IDGenColumn1">
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel1"
-                    text="{i18n>investorsName}"
+                    text="{i18n>clientID}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText1"
-                        text="{sharesModel>INVESTORS_NAME}"
+                        text="{sharesModel>Invclientid}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column id="_IDGenColumn2">
+            <table:Column width="200px">
                 <Label
-                    id="_IDGenLabel2"
-                    text="{i18n>totalShares}"
+                    text="{i18n>folioNumber}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText2"
-                        text="{sharesModel>TOTAL_SHARES}"
+                        text="{sharesModel>Invfolionumber}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column id="_IDGenColumn3">
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel3"
-                    text="{i18n>remarks}"
+                    text="{i18n>investorFirstName}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText3"
-                        text="{sharesModel>REMARKS}"
+                        text="{sharesModel>Invfname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>investorMiddleName}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invsmname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>investorLastName}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invlname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>fatherHusbandFirstName}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invfhfname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>fatherHusbandMiddleName}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invfhmname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>fatherHusbandLastName}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invfhlname}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="400px">
+                <Label
+                    text="{i18n>address}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invaddress}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>country}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invcountry}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>state}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invstate}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>district}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invdistrict}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>pinCode}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invpincode}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="200px">
+                <Label
+                    text="{i18n>numberOfShares}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invnoofshares}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>nominalValueOfShares}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invnominalvalueofshare}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="250px">
+                <Label
+                    text="{i18n>actualDateOfTransferToIEPF}"
+                />
+                <table:template>
+                    <Text
+                        text="{sharesModel>Invdateofsharetransfer2iepf}"
                     />
                 </table:template>
             </table:Column>
@@ -119,7 +242,7 @@
         selectionMode="None"
         visible="{= ${viewModel>/selectedType} === 'D'}"
         alternateRowColors="true"
-        fixedColumnCount="1"
+        fixedColumnCount="2"
     >
         <table:extension>
             <OverflowToolbar>
@@ -133,7 +256,7 @@
                     press="onDownloadTemplate"
                     icon="sap-icon://download"
                     type="Reject"
-                    visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} !== '01' &amp;&amp; ${viewModel>/requestDetails/Status} !== '02' }"
                 />
 
                 <unified:FileUploader
@@ -141,11 +264,11 @@
                     sameFilenameAllowed="true"
                     iconOnly="false"
                     buttonOnly="true"
-                    fileType="XLSX"
+                    fileType="XLSX,xlsm"
                     icon="sap-icon://upload"
                     iconFirst="true"
                     change="onFileChange"
-                    visible="{= ${viewModel>/requestDetails/Status} !== '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} !== '01' &amp;&amp; ${viewModel>/requestDetails/Status} !== '02' }"
                     style="Accept"
                     buttonText="{i18n>uploadBtnText}"
                 />
@@ -153,7 +276,7 @@
                     id="_IDGenButton1"
                     text="{i18n>downloadReportBtnText}"
                     icon="sap-icon://excel-attachment"
-                    visible="{= ${viewModel>/requestDetails/Status} === '02' }"
+                    visible="{= ${viewModel>/requestDetails/Status} === '01' || ${viewModel>/requestDetails/Status} === '02' }"
                     press="onDownload"
                     type="Reject"
                 />
@@ -166,153 +289,173 @@
             />
         </table:rowMode>
         <table:columns>
-            <table:Column
-                id="_IDGenColumn4"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel4"
-                    text="{i18n>dpIdClientIdFolioNo}"
+                    text="{i18n>dpId}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText4"
-                        text="{dividendModel>DP_ID_CLIENT_ID_FOLIO_NO}"
+                        text="{dividendModel>Invdpid}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn5"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel5"
-                    text="{i18n>investorsName}"
+                    text="{i18n>clientID}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText5"
-                        text="{dividendModel>INVESTORS_NAME}"
+                        text="{dividendModel>Invclientid}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn6"
-                width="200px"
-            >
+            <table:Column width="200px">
                 <Label
-                    id="_IDGenLabel6"
-                    text="{i18n>dividendAmount}"
+                    text="{i18n>folioNumber}" 
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText6"
-                        text="{dividendModel>DIVIDEND_AMOUNT}"
+                        text="{dividendModel>Invfolionumber}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn7"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel7"
-                    text="{i18n>address1}"
+                    text="{i18n>investorFirstName}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText7"
-                        text="{dividendModel>ADDRESS1}"
+                        text="{dividendModel>Invfname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn8"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel8"
-                    text="{i18n>address2}"
+                    text="{i18n>investorMiddleName}" 
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText8"
-                        text="{dividendModel>ADDRESS2}"
+                        text="{dividendModel>Invsmname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn9"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel9"
-                    text="{i18n>address3}"
+                    text="{i18n>investorLastName}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText9"
-                        text="{dividendModel>ADDRESS3}"
+                        text="{dividendModel>Invlname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn10"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel10"
-                    text="{i18n>address4}"
+                    text="{i18n>fatherHusbandFirstName}" 
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText10"
-                        text="{dividendModel>ADDRESS4}"
+                        text="{dividendModel>Invfhfname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn11"
-                width="150px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel11"
-                    text="{i18n>pin}"
+                    text="{i18n>fatherHusbandMiddleName}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText11"
-                        text="{dividendModel>PIN}"
+                        text="{dividendModel>Invfhmname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn12"
-                width="200px"
-            >
+            <table:Column width="250px">
                 <Label
-                    id="_IDGenLabel12"
-                    text="{i18n>dueDate}"
+                    text="{i18n>fatherHusbandLastName}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText12"
-                        text="{dividendModel>Due_Date}"
+                        text="{dividendModel>Invfhlname}"
                     />
                 </table:template>
             </table:Column>
-            <table:Column
-                id="_IDGenColumn13"
-                width="500px"
-            >
+            <table:Column width="400px">
                 <Label
-                    id="_IDGenLabel13"
-                    text="{i18n>remarks}"
+                    text="{i18n>address}"
                 />
                 <table:template>
                     <Text
-                        id="_IDGenText13"
-                        text="{dividendModel>REMARKS}"
+                        text="{dividendModel>Invaddress}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>country}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invcountry}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>state}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invstate}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>district}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invdistrict}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="100px">
+                <Label
+                    text="{i18n>pinCode}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invpincode}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="300px">
+                <Label
+                    text="{i18n>investmentType}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Investmenttype}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="150px">
+                <Label
+                    text="{i18n>amountTransferred}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invamounttransfered}"
+                    />
+                </table:template>
+            </table:Column>
+            <table:Column width="150px">
+                <Label
+                    text="{i18n>dateOfEvent}"
+                />
+                <table:template>
+                    <Text
+                        text="{dividendModel>Invdateofevent}"
                     />
                 </table:template>
             </table:Column>
